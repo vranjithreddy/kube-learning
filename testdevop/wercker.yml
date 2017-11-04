@@ -76,5 +76,5 @@
      - script:
          name: Start all services/containers
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 3333:80 --name ranjith-cube-app ranjithraj2035/kube-doc-rep:current
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 3333:80 --name ranjith-kube-app ranjithraj2035/kube-doc-rep:current
 
