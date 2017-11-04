@@ -60,11 +60,11 @@
      - script:
          name: Stop all running containers
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker stop ravi-linux || echo ‘failed to stop running container’
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker stop ranjith-kube  || echo ‘failed to stop running container’
      - script:
          name: Remove stopped service/containers
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker rm ravi-linux || echo ‘failed to remove stopped container’
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker rm ranjith-kube  || echo ‘failed to remove stopped container’
      - script:
          name: Remove image behind stopped container
          code: |
@@ -76,5 +76,5 @@
      - script:
          name: Start all services/containers
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 3333:80 --name ranjith-kube-app ranjithraj2035/kube-doc-rep:current
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 3333:80 --name ranjith-kube ranjithraj2035/kube-doc-rep:current
 
