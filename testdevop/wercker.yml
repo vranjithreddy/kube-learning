@@ -20,7 +20,7 @@
    after-steps:                    
      - slack-notifier:
          url: $SLACK_URL
-         username: shan1602
+         username: ranjithraj2035
          channel: notifications
  push-2-docker:
    box: nginx:latest
@@ -41,7 +41,7 @@
          password: $DOCKER_PASSWORD
          # we want to push both the release image and as the latest
          tag: dev-$WERCKER_GIT_COMMIT latest
-         repository: shan1602/testdevop
+         repository: ranjithraj2035/kube-doc-rep
          registry: https://hub.docker.com
          ports: 80 443
          cmd: nginx -g 'daemon off';
@@ -50,13 +50,13 @@
    box: node:latest
    steps:
      - wercker/add-ssh-key:
-         keyname: RAVI_DOCKER_AWS
+         keyname: ranjith_key
      - add-to-known_hosts:
          hostname: $DEV_REMOTE_HOST
      - script:
          name: Pull newest docker images
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker pull shan1602/testdevop
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker pull ranjithraj2035/kube-doc-rep
      - script:
          name: Stop all running containers
          code: |
@@ -68,13 +68,13 @@
      - script:
          name: Remove image behind stopped container
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker rmi shan1602/testdevop:current || echo ‘failed to remove image behind stopped container’
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker rmi ranjithraj2035/kube-doc-rep:current || echo ‘failed to remove image behind stopped container’
      - script:
          name: Tag the pulled image
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker tag shan1602/testdevop:latest shan1602/testdevop:current
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker tag ranjithraj2035/kube-doc-rep:latest ranjithraj2035/kube-doc-rep:current
      - script:
          name: Start all services/containers
          code: |
-           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 97:80 --name ravi-linux shan1602/testdevop:current
+           ssh $DEV_REMOTE_USER@$DEV_REMOTE_HOST sudo docker container run --detach -p 3333:80 --name ranjith-cube-app ranjithraj2035/kube-doc-rep:current
 
